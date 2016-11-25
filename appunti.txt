@@ -1,0 +1,64 @@
+common:
+sudo route add -net 224.0.0.0 netmask 240.0.0.0 dev eth0
+
+primo extender:
+vlc udp://@239.255.42.42:5004
+
+secondo extender dopo aver cambiato indirizzo di stream udp:
+vlc udp://@239.255.43.43:5004
+
+
+
+
+uccisione iptables:
+iptables -F
+iptables -X
+iptables -t nat -F
+iptables -t nat -X
+iptables -t mangle -F
+iptables -t mangle -X
+iptables -P INPUT ACCEPT
+iptables -P FORWARD ACCEPT
+iptables -P OUTPUT ACCEPT
+
+
+
+cambio ip FUNZIONA DOPO UN REBOOT!!!:
+http://192.168.1.238/dev/info.cgi?action=network&ipaddr0=192&ipaddr1=168&ipaddr2=1&ipaddr3=228&netmask0=255&netmask1=255&netmask2=255&netmask3=0&gw0=192&gw1=168&gw2=1&gw3=254
+
+cambio ip broadcast:
+/dev/info.cgi?action=streaminfo&udp=y&rtp=n&multicast=y&unicast=n&mcastaddr=239.255.43.43&port=5004
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+APPUNTI:
+- set audio settings (doesn't work)
+http://192.168.1.238/dev/info.cgi?action=audioinfo&selaudio_type=1_AAC&selaudio_sprate=48000&selaudio_brate=256
+
+- reboot device (works OK)
+http://192.168.1.238/dev/info.cgi?action=reboot&reboot=Reboot
+
+- set network settings (works OK)
+http://192.168.1.238/dev/info.cgi?action=network&ipaddr0=10&ipaddr1=1&ipaddr2=0&ipaddr3=99&netmask0=255&netmask1=255&netmask2=255&netmask3=0&gw0=10&gw1=0&gw2=0&gw3=1
+
+- reset to default (doesn't work)
+http://192.168.1.238/dev/info.cgi?action=Reset&Reset=Reset
+
+- this should set MAC address (untested)
+http://192.168.1.238/dev/info.cgi?action=macaddr&macaddr0=yy&macaddr1=yy&macaddr2=yy&macaddr3=yy&
+macaddr4=yy&macaddr5=yy
